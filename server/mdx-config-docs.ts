@@ -91,7 +91,7 @@ const config: MdxConfig = {
     [remarkCodeSnippet, { langs: ["code", "bash"], resolve: true }], // Plugin for custom code snippets with multiple copy buttons
     remarkGFM, // Adds tables
     remarkImportFiles, // Replaces paths to files with imports
-    remarkLinks, // Make links in docs absolute with /ver/X.X included
+    remarkLinks, // Make links in docs absolute with /docs/X.X included
   ],
   rehypePlugins: [
     rehypeSlug, // Adds ids to headers to use in anchors

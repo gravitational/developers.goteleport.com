@@ -2,7 +2,7 @@
     "navigation": [
       {
         "icon": "stack",
-        "title": "API",
+        "title": "Go Client",
         "entries": [
           { "title": "Introduction", "slug": "/" },
           { "title": "Getting Started", "slug": "/getting-started/" },

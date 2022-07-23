@@ -52,13 +52,13 @@ export const toCopyContent = (
  * This function only gets the part of the path without the hostname
  * and documentation basePath (`goteleport.com/docs/`).
  * If it is not the current version, the path without hostname and documentation basePath
- * will contain `ver` and version number (`/ver/10.0/setup/operations/backup-restore/`).
+ * will contain `ver` and version number (`/docs/10.0/setup/operations/backup-restore/`).
  * So this function has an extra check to see if the path contains a version and avoid it.
  */
 export const getFirstLvlNav = (locPath: string): string => {
   let firstLvlNav = locPath.split("/")[1];
 
-  if (firstLvlNav === "ver") {
+  if (firstLvlNav === "docs") {
     firstLvlNav = locPath.split("/")[3];
   }
 

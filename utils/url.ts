@@ -58,7 +58,8 @@ export const normalizePath = (fullPath: string) => {
   const parts = splitPath(fullPath);
 
   parts.path = parts.path.replace(
-    `/ver/${process.env.DOCS_LATEST_VERSION}`,
+    // #devsite put latest versoin inside quote to align with sidenav menu
+    `/docs/"${process.env.DOCS_LATEST_VERSION}"`,
     ""
   );
 
@@ -124,7 +125,7 @@ export const isLocalAssetFile = (
 
 export const getPathWithoutVersion = (route: string) => {
   const path = splitPath(route).path;
-  return path.startsWith("/ver/")
+  return path.startsWith("/docs/")
     ? path.split("/").slice(3).join("/")
     : path.slice(1);
 };

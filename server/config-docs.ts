@@ -145,7 +145,7 @@ const validator = ajv.compile({
 /*
  * We store relative paths in the config so we don't need to change them all
  * when we add new version, but for next/link and next/router to work they should be absolte.
- * So we are adding "/docs/ver/X.X/" or just "/docs/" for the current version here.
+ * So we are adding "/docs/docs/X.X/" or just "/docs/" for the current version here.
  *
  * Also we check that all links ends with "/: for consistency.
  */
@@ -161,8 +161,12 @@ const normalizeDocsUrl = (version: string, url: string, raw?: boolean) => {
     throw Error(`File ${configPath} misses trailing slash in '${url}' path.`);
   }
 
-  const addVersion = raw || latest !== version;
-  const prefix = `${addVersion ? `/ver/${version}` : ""}`;
+  // #devsite
+  // const addVersion = raw || latest !== version;
+  // const prefix = `${addVersion ? `/docs/${version}` : ""}`;
+  // hardcode `/docs` path to every docs links
+
+  const prefix = `/docs/${version}`;
 
   return prefix + url;
 };

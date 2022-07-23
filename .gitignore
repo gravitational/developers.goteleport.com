@@ -12,7 +12,7 @@
 /public/static/assets
 /public/docs_sitemap.xml
 /public/algolia_sitemap.xml
-/pages/ver/*
+/pages/docs/*
 /utils/articleLinks.json
 
 # misc

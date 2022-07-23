@@ -82,7 +82,7 @@ const findExistingPage = ({
         elemVers
       );
       if (initialVersion === latestVersion) {
-        initialPageWithNewVersion = `/ver/${elemVers}${initialPage}`;
+        initialPageWithNewVersion = `/docs/${elemVers}${initialPage}`;
       }
 
       if (Number(initialVersion) < Number(version)) {
@@ -155,13 +155,13 @@ const findExistingPage = ({
     }
   }
 
-  if (foundElement?.path.startsWith("/ver/")) {
+  if (foundElement?.path.startsWith("/docs/")) {
     return foundElement.path;
   } else if (foundElement) {
-    return `/ver/${version}${foundElement.path}`;
+    return `/docs/${version}${foundElement.path}`;
   }
 
-  return `/ver/${version}/`;
+  return `/docs/${version}/`;
 };
 
 export function useFindDestinationPath(versions: VersionsInfo) {
@@ -172,7 +172,7 @@ export function useFindDestinationPath(versions: VersionsInfo) {
 
   return useCallback(
     (versDestination) => {
-      const targetPageWithVersion = `/ver/${versDestination}/${getPathWithoutVersion(
+      const targetPageWithVersion = `/docs/${versDestination}/${getPathWithoutVersion(
         router.asPath
       )}`;
       let path = "/";

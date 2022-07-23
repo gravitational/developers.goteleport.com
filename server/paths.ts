@@ -31,7 +31,7 @@ const filterNoIndexPage = (path: string) => {
  */
 
 const getSlugsForVersion = (version: string) => {
-  const root = join("/ver", version);
+  const root = join("/docs", version);
   const path = resolve("content", version, "docs/pages");
 
   return glob
@@ -49,8 +49,7 @@ const getSlugsForVersion = (version: string) => {
 
 const normalizeDocSlug = (slug: string, version: string) => {
   const isLatest = version === latest;
-
-  return isLatest ? slug.replace(`/ver/${latest}`, "") : slug;
+  return isLatest ? slug.replace(`/docs/${latest}`, "") : slug;
 };
 
 /*
