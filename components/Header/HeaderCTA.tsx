@@ -30,7 +30,7 @@ const HeaderCTA = () => {
       {isSignInVisible && <DropdownMenuOverlay />}
       <div className={styles.wrapper}>
         <div className={styles.group} ref={ref}>
-          <Button
+          {/* <Button
             as="link"
             href="https://teleport.sh/"
             onClick={toggleSignIn}
@@ -38,7 +38,7 @@ const HeaderCTA = () => {
             className={styles.cta}
           >
             Sign In
-          </Button>
+          </Button> */}
           <div
             className={cn(styles.dropdown, isSignInVisible && styles.visible)}
           >
@@ -58,8 +58,13 @@ const HeaderCTA = () => {
             </DropdownMenu>
           </div>
         </div>
-        <Button as="link" href="/pricing/" className={styles.cta}>
-          Get Started
+        <Button
+          target="_blank"
+          as="link"
+          href="https://goteleport.com/pricing"
+          className={styles.cta}
+        >
+          Try Teleport
         </Button>
       </div>
     </>
