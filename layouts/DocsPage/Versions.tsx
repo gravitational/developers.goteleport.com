@@ -24,6 +24,9 @@ const validVersion = (thisVersion: number, latestVersion: number) => {
   return thisVersion >= latestVersion - 2 ? true : false;
 };
 
+// versionaCheck is hardcoded as false to treat all mdx pages as latest version. #devsite
+const versionaCheck = false;
+
 const Versions = ({
   current,
   available,
@@ -47,7 +50,9 @@ const Versions = ({
 
       const versionInfo: VersionsDropdown = {
         value: version,
-        deprecated: !validVersion(versionNumber, latestNumber),
+        deprecated: versionaCheck
+          ? !validVersion(versionNumber, latestNumber)
+          : false,
       };
       return versionInfo;
     });
@@ -65,15 +70,18 @@ const Versions = ({
   const navigateToVersion = useCallback(
     (option: string) => {
       // if version is deprecated or Older Versions is selected, redirect to /older-versions
-      if (!validVersion(Number(option), latestNumber)) {
+      if (!validVersion(Number(option), latestNumber) && versionaCheck) {
         setCurrentItem(option);
         router.push("/older-versions");
         return;
       }
 
       if (option === "Older Versions") {
-        setCurrentItem(option);
-        router.push("/older-versions");
+        if (versionaCheck) {
+          setCurrentItem(option);
+          router.push("/older-versions");
+        }
+
         return;
       }
 

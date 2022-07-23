@@ -68,7 +68,7 @@ interface DocsContextProviderProps {
 
 export const DocsContextProvider = ({ children }: DocsContextProviderProps) => {
   const router = useRouter();
-  const current = router.asPath.startsWith("/ver/")
+  const current = router.asPath.startsWith("/docs/")
     ? router.asPath.split("/")[2]
     : "";
 

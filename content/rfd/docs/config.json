@@ -1,0 +1,13 @@
+{
+    "navigation": [
+      {
+        "icon": "stack",
+        "title": "RFD",
+        "entries": [
+          { "title": "What are RFDs?", "slug": "/" },
+          { "title": "Testing Guidelines", "slug": "/testing-guidelines/" }
+        ]
+      }
+    ]
+  }
+  

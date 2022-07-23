@@ -1,5 +1,5 @@
 /*
- * Creates symlinks from mdx files in "content/X.X/docs/" to `pages/ver/X.X/`.
+ * Creates symlinks from mdx files in "content/X.X/docs/" to `pages/docs/X.X/`.
  */
 
 import { symlinkSync, rmdirSync, existsSync, mkdirSync } from "fs";
@@ -9,7 +9,7 @@ import { loadConfig } from "../.build/server/config-site.mjs";
 
 const { versions } = loadConfig();
 
-const docsPagesRoot = "pages/ver";
+const docsPagesRoot = "pages/docs";
 
 if (existsSync(docsPagesRoot)) {
   rmdirSync(docsPagesRoot, { recursive: true });
