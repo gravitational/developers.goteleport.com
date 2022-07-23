@@ -36,6 +36,7 @@
   --fs-header-3: 24px;
   --fs-header-2: 28px;
   --fs-header-1: 32px;
+  --hero-header: 52px;
 
   /* font weights */
   --fw-regular: 400;
@@ -62,6 +63,7 @@
   --m-8: 64px;
   --m-9: 72px;
   --m-10: 80px;
+  --m-12: 100px;
 
   /* timings */
   --t-fast: 150ms;
