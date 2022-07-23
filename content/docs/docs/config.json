@@ -1,0 +1,14 @@
+{
+    "navigation": [
+      {
+        "icon": "stack",
+        "title": "API",
+        "entries": [
+          { "title": "Introduction", "slug": "/" },
+          { "title": "Getting Started", "slug": "/getting-started/" },
+          { "title": "API Architecture", "slug": "/architecture/" }
+        ]
+      }
+    ]
+  }
+  

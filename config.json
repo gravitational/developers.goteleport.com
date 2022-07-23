@@ -1,20 +1,11 @@
 {
   "versions": [
     {
-      "name": "8.0",
-      "branch": "branch/v8"
+      "name": "docs",
+      "branch": "master"
     },
     {
-      "name": "9.0",
-      "branch": "branch/v9"
-    },
-    {
-      "name": "10.0",
-      "branch": "branch/v10",
-      "latest": true
-    },
-    {
-      "name": "11.0",
+      "name": "rfd",
       "branch": "master"
     }
   ]
