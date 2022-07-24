@@ -42,12 +42,12 @@
   font-weight: var(--fw-bold);
 
   @media (--sm-scr) {
-    font-size: var(--fs-header-2);
+    font-size: var(--fs-header-3);
     line-height: var(--lh-lg);
   }
 
   @media (--md-scr) {
-    font-size: var(--fs-header-1);
+    font-size: var(--fs-header-2);
     line-height: var(--lh-xxl);
   }
 }

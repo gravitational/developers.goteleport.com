@@ -88,7 +88,7 @@ const DocsNavigationItems = ({
                   onClick={onClick}
                 >
                   {entry.title}
-                  {!!entry.forScopes?.length && getScopeIcons(entry.forScopes)}
+                  {/* {!!entry.forScopes?.length && getScopeIcons(entry.forScopes)} */}
                   {!!entry.entries?.length && (
                     <Icon
                       size="sm"
@@ -201,12 +201,12 @@ const DocNavigation = ({
 
   return (
     <div className={cn(styles.wrapper, section && styles.section)}>
-      <div className={styles.searchbar}>
+      {/* <div className={styles.searchbar}>
         <Search />
         <HeadlessButton onClick={toggleMenu} className={styles.menu}>
           <Icon name={visible ? "close" : "hamburger"} size="md" />
         </HeadlessButton>
-      </div>
+      </div> */}
       <nav className={cn(styles.nav, visible && styles.visible)}>
         <ul className={styles.categories}>
           {data.map((props, index) => (
