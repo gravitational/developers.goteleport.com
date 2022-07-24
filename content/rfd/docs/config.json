@@ -4,8 +4,18 @@
         "icon": "stack",
         "title": "RFD",
         "entries": [
-          { "title": "What are RFDs?", "slug": "/" },
-          { "title": "Testing Guidelines", "slug": "/testing-guidelines/" }
+          { "title": "RFD Basics", "slug": "/" },
+          { "title": "Testing Guidelines", "slug": "/0001-testing-guidelines/" },
+          { "title": "Session Streamind", "slug": "/0002-streaming/" },
+          { "title": "Extended Approval", "slug": "/0003-extended-approval-workflows/" },
+          { "title": "Kubernetes Service", "slug": "/0005-kubernetes-service/" },
+          { "title": "OSS Roles", "slug": "/0007-rbac-oss/" }, 
+          { "title": "Application Access", "slug": "/0008-application-access/" },
+          { "title": "Session Locking", "slug": "/0009-locking/" },
+          { "title": "API", "slug": "/0010-api/" },
+          { "title": "Database Access", "slug": "/0011-database-access/" },
+          { "title": "Teleport Versioning", "slug": "/0012-teleport-versioning/" }
+         
         ]
       }
     ]

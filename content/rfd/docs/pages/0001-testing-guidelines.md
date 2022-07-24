@@ -1,13 +1,9 @@
 ---
 title: RFD 1 - Testing guidelines
-description: Request For Discussion (RFD) is a design document format for non-trivial technical Teleport changes. It's also a process by which these documents are proposed, discussed, approved and tracked.
+description: Guidelines for writing Go tests for teleport.
 h1: RFD 1 - Testing guidelines
-layout: tocless-doc
 ---
 
-## What
-
-Guidelines for writing Go tests for teleport.
 
 ## Why
 
