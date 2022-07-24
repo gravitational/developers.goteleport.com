@@ -21,7 +21,7 @@ versions.forEach((version) => {
   const destination = resolve(docsPagesRoot, version);
 
   const paths = glob
-    .sync(resolve(source, "**/*.mdx"))
+    .sync(resolve(source, "**/*.md*"))
     .filter((path) => !path.includes("/includes/")); // Files in `/includes/` folders are not actual pages
 
   paths.forEach((oldPath) => {

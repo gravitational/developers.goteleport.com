@@ -35,7 +35,7 @@ const getSlugsForVersion = (version: string) => {
   const path = resolve("content", version, "docs/pages");
 
   return glob
-    .sync(join(path, "**/*.mdx"))
+    .sync(join(path, "**/*.md*"))
     .filter(filterNoIndexPage)
     .filter((path) => !path.includes("/includes/"))
     .map((filename) =>
