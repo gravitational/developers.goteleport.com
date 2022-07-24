@@ -12,6 +12,7 @@ import forkmeUrl from "./assets/forkme.webp";
 
 interface DocHeaderProps {
   title: string;
+  description: string;
   icon?: IconName;
   versions: VersionsInfo;
   githubUrl: string;
@@ -24,6 +25,7 @@ const GITHUB_DOCS = process.env.NEXT_PUBLIC_GITHUB_DOCS;
 
 const DocHeader = ({
   title,
+  description,
   icon = "book",
   versions,
   githubUrl,
@@ -35,19 +37,20 @@ const DocHeader = ({
 
   return (
     <section className={styles.wrapper}>
-      <a href={GITHUB_DOCS} className={styles["github-link"]}>
+      {/* <a href={GITHUB_DOCS} className={styles["github-link"]}>
         <NextImage
           width="112"
           height="112"
           src={forkmeUrl}
           alt="Fork me on GitHub"
         />
-      </a>
+      </a> */}
       <Icon name={icon} size="xl" className={styles.icon} />
-      <div className={styles.description}>
+      <div className={styles.body}>
         <p className={styles.subtitle}>Teleport</p>
         <h1 className={styles.title}>{title}</h1>
-        <div className={styles.dropdowns}>
+        <p className={styles.description}>{description}</p>
+        {/* <div className={styles.dropdowns}>
           <Versions
             {...versions}
             getNewVersionPath={getNewVersionPath}
@@ -68,7 +71,7 @@ const DocHeader = ({
               Improve
             </Button>
           )}
-        </div>
+        </div> */}
       </div>
     </section>
   );

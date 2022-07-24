@@ -24,7 +24,7 @@
   }
 }
 
-.description {
+.body {
   display: flex;
   flex-direction: column;
   padding-top: var(--m-4);
@@ -50,7 +50,7 @@
 
 .title {
   margin-top: 0;
-  font-weight: var(--fw-regular);
+  font-weight: var(--fw-bold);
   color: var(--color-dark-purple);
 
   @media (--sm-scr) {
@@ -65,6 +65,22 @@
     padding-left: 0;
     font-size: var(--fs-header-1);
   }
+}
+
+.description {
+  color: var(--color-gray);
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+
+  @media (--sm-scr) {
+    padding-top: var(--m-2);
+  }
+
+  @media (--md-scr) {
+    padding-right: var(--m-4);
+  }
+ 
 }
 
 .scopeInfo {

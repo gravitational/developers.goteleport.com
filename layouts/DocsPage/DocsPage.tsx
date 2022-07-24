@@ -89,6 +89,7 @@ const DocsPage = ({
         <div className={styles.body}>
           <Header
             title={h1 || title}
+            description={description}
             versions={versions}
             githubUrl={githubUrl}
             icon={icon}
@@ -96,12 +97,12 @@ const DocsPage = ({
             latest={latest}
             scopes={scopes}
           />
-          {videoBanner && (
+          {/* {videoBanner && (
             <VideoBar className={styles.video} {...videoBanner} />
-          )}
+          )} */}
           <div className={cn(styles["main-wrapper"], styles[layout])}>
             <div className={styles.main}>
-              {(isOldVersion || isBetaVersion) && (
+              {/* {(isOldVersion || isBetaVersion) && (
                 <Notice type="danger" className={styles.notice}>
                   {isOldVersion && (
                     <>
@@ -118,7 +119,7 @@ const DocsPage = ({
                     </>
                   )}
                 </Notice>
-              )}
+              )} */}
               <VarsProvider>
                 <VarList />
                 <div className={cn(styles.text, styles[layout])}>
