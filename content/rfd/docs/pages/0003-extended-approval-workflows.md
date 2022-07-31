@@ -1,7 +1,7 @@
 ---
-title: RFD 3 - Extended approval workflows
+title: RFD 4 - Extended approval workflows
 description: Extended approval workflows extend Workflows API with new controls for granting limited access to infrastructure on demand.
-h1: RFD 3 - Extended approval workflows
+h1: RFD 4 - Extended approval workflows
 authors: Alexander Klizhentas (sasha@goteleport.com), Ben Arent (ben@goteleport.com)
 state: implemented
 ---

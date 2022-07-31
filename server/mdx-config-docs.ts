@@ -100,7 +100,8 @@ const config: MdxConfig = {
       {
         aliases: {
           bash: ["bsh", "systemd", "code", "powershell"],
-          yaml: ["conf", "toml"],
+          yaml: ["conf", "toml", "PlantUML", "prolog", "pro", "hcl", "mermaid"],
+          json: ["protobuf", "proto"],
         },
       },
     ], // Adds syntax highlighting
