@@ -2,20 +2,16 @@ import { MenuCategoryProps } from "./Category";
 
 const menu: MenuCategoryProps[] = [
   {
-    title: "API Reference",
-    description: "API Reference",
-    href: "/docs/api-reference/",
+    title: "API Client",
+    description: "Build Teleport API client",
+    href: "/docs/api-client",
   },
   {
     title: "RFDs",
     description: "Teleport RFD",
     href: "/docs/rfd/",
   },
-  {
-    title: "Go Client",
-    description: "Build a Go client to implement Teleport API",
-    href: "/docs/go-client",
-  },
+
   {
     title: "Support",
     description: "Teleport documentation",
