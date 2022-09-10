@@ -2,11 +2,11 @@
     "navigation": [
       {
         "icon": "stack",
-        "title": "Go Client",
+        "title": "API Client",
         "entries": [
           { "title": "Introduction", "slug": "/" },
-          { "title": "Getting Started", "slug": "/getting-started/" },
-          { "title": "API Architecture", "slug": "/architecture/" }
+          { "title": "API Architecture", "slug": "/architecture/" },
+          { "title": "Bootstrap Go Client", "slug": "/bootstrap-go-client/" }
         ]
       }
     ]
