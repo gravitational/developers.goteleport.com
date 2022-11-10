@@ -2,19 +2,14 @@ import { MenuCategoryProps } from "./Category";
 
 const menu: MenuCategoryProps[] = [
   {
-    title: "API Reference",
-    description: "API Reference",
-    href: "/docs/api-reference/",
-  },
-  {
     title: "RFDs",
     description: "Teleport RFD",
     href: "/docs/rfd/",
   },
   {
-    title: "Go Client",
-    description: "Build a Go client to implement Teleport API",
-    href: "/docs/go-client",
+    title: "API Client",
+    description: "Build Teleport API client",
+    href: "/docs/api-client",
   },
   {
     title: "Support",
@@ -23,10 +18,10 @@ const menu: MenuCategoryProps[] = [
     children: [
       {
         icon: "question",
-        title: "Community Forum",
+        title: "Explore Teleport Community",
         description:
           "Ask us a setup question, post your tutorial, feedback or idea on our forum",
-        href: "https://github.com/gravitational/teleport/discussions",
+        href: "https://goteleport.com/community",
       },
       {
         icon: "window",

@@ -1,0 +1,21 @@
+{
+    "navigation": [
+      {
+        "icon": "stack",
+        "title": "API Client",
+        "entries": [
+          { "title": "Introduction", "slug": "/" },
+          { "title": "API Architecture", "slug": "/architecture/" },
+          { "title": "Bootstrap Go Client", "slug": "/bootstrap-go-client/" },
+          { "title": "Access Request", "slug": "/access-request/",
+          "entries": [
+            { "title": "Create Plugin", "slug": "/access-request/create-access-request-plugin/" },
+            { "title": "Approval Workflow", "slug": "/access-request/approval-workflow/" }
+          ]
+        
+          }
+        ]
+      }
+    ]
+  }
+  
