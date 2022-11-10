@@ -9,7 +9,7 @@
           { "title": "Bootstrap Go Client", "slug": "/bootstrap-go-client/" },
           { "title": "Access Request", "slug": "/access-request/",
           "entries": [
-            { "title": "Handeling Access Request", "slug": "/access-request/handle-access-requests/" },
+            { "title": "Create Plugin", "slug": "/access-request/create-access-request-plugin/" },
             { "title": "Approval Workflow", "slug": "/access-request/approval-workflow/" }
           ]
         

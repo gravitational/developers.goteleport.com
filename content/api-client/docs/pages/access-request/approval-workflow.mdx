@@ -8,7 +8,8 @@ layout: tocless-doc
 
 This example plugin demonstrates how to create a workflows plugin to automatically approve/deny new access requests based on a simple Allow List.
 
-### Access Plugin
+## Configure Resources 
+Create Access Request Plugin.
 
 ```yaml
 $ vi access-plugin.yaml
@@ -31,35 +32,23 @@ spec:
 version: v4
 ```
 
-### Requester config
 
-```yaml
-$ vi requester.yaml
+### Create resources
 
-kind: role
-metadata:
-  name: requester
-spec:
-  allow:
-    request:
-      roles:
-        - admin
-version: v4
+Create the access-plugin user and role
+```sh
+$ tctl create -f access-plugin.yaml
 ```
 
 
-### Teleport config file to read identity file 
+## Create config file
+This config file configures an allow list for auto approval.
 
 ```yaml
 $ vi config.toml
 
 # Teleport config values
 ....
-# plugin name used to associate data with the plugin
-plugin_name = "example"
-
-# Teleport Auth/Proxy address
-addr = "localhost:3025"
 
 # Teleport identity file with TLS/SSH certificates.
 identity_file = "access-plugin-identity"
@@ -71,49 +60,16 @@ allow_list = [
 ]
 ```
 
-### Your API client
-
-#### Load config
-
-```go 
-type config struct {
-	// PluginName is used to associate events and stored plugin data with a plugin
-	PluginName string `toml:"plugin_name"`
-	// Addr is the address used to connect to your Teleport Auth server. This can
-	// be the auth, proxy, or tunnel proxy address.
-	Addr string `toml:"addr"`
-	// IdentityFile is used to authenticate a connection to the Teleport
-	// Auth server and authorize client requests.
-	IdentityFile string `toml:"identity_file"`
-	// AllowList is a list of users to automatically approve access requests for.
-	AllowList []string `toml:"allow_list"`
-}
-
-func loadConfig(filepath string) (*config, error) {
-	t, err := toml.LoadFile(filepath)
-	if err != nil {
-		return nil, trace.Wrap(err)
-	}
-	conf := &config{}
-	if err := t.Unmarshal(conf); err != nil {
-		return nil, trace.Wrap(err)
-	}
-	return conf, nil
-}
-```
-
-#### Run 
+## Create Plugin
 
 ```go
+
+// Create new client
 client, err := client.New(ctx, client.Config{
-	Addrs: []string{cfg.Addr},
-	Credentials: []client.Credentials{
-		client.LoadIdentityFile(cfg.IdentityFile),
-	},
+	...
 })
 
-
-
+// Create pending request filter
 filter := types.AccessRequestFilter{
 	State: types.RequestState_PENDING,
 }
@@ -193,3 +149,46 @@ for {
 }
 
 ```
+
+Now start the plugin and keep it running.
+```sh
+$ go run plugin.go
+```
+
+
+## Making Access Request
+
+### Create the requester role
+
+```sh
+$ vi requester.yaml
+
+kind: role
+metadata:
+  name: requester
+spec:
+  allow:
+    request:
+      roles:
+        - admin
+version: v4
+
+$ tctl create -f requester.yaml
+```
+
+### Create a new user named alice using this role
+```sh
+$ tctl users add alice --roles=requester
+```
+
+### Login as alice
+```sh
+$ tsh --proxy=proxy.example.com login --user=alice
+```
+
+### Request the admin role as alice
+```sh
+$ tsh --proxy=proxy.example.com request new --roles=admin
+```
+
+Since `alice` is on the Allow List in `cofig.toml` with allowed role `requester`, the request should be automatically approved by the plugin.

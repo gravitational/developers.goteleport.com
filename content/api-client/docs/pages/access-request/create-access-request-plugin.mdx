@@ -1,0 +1,190 @@
+---
+title: Create Access Request Plugin
+description: Get started with Teleport access request plugin
+h1: Create Access Request Plugin
+layout: tocless-doc
+---
+
+In this tutotial, we explore creating access request plugin and use the plugin to create a new access request for the `access-admin` user to use the `admin` role.
+
+
+
+## Create role
+Create the `access-admin` user and role using the following commands:
+
+```sh
+# Create role
+$ vi access-admin.yaml
+kind: role
+metadata:
+  name: access-admin
+spec:
+  allow:
+    rules:
+      - resources: ['access_request']
+        verbs: ['create', 'update', 'delete']
+    request:
+      roles: ['admin']
+  deny:
+    node_labels:
+      '*': '*'
+version: v3
+
+# Create role
+$ tctl create -f access-admin.yaml
+```
+```sh
+# Create user
+$ tctl users add access-admin --roles=access-admin
+```
+
+## Generate Credentials
+
+Login with `tsh` to generate Profile credentials.
+
+```bash
+# login and automatically generate keys
+$ tsh login --user=access-admin
+```
+
+
+Optionally, you can also obtain an identity file and import it using config file. 
+
+#### Generate an identity file
+```sh
+$ tctl auth sign --ttl=8760h --format=file --user=access-plugin --out=access-plugin-identity
+```
+
+
+#### Create config file
+
+```yaml
+$ vi config.toml
+
+# Teleport config values
+....
+# plugin name used to associate data with the plugin
+plugin_name = "example"
+
+# Teleport Auth/Proxy address
+addr = "localhost:3025"
+
+# Teleport identity file with TLS/SSH certificates.
+identity_file = "access-plugin-identity"
+
+```
+
+
+#### Load config
+
+```go 
+type config struct {
+	// PluginName is used to associate events and stored plugin data with a plugin
+	PluginName string `toml:"plugin_name"`
+	// Addr is the address used to connect to your Teleport Auth server. This can
+	// be the auth, proxy, or tunnel proxy address.
+	Addr string `toml:"addr"`
+	// IdentityFile is used to authenticate a connection to the Teleport
+	// Auth server and authorize client requests.
+	IdentityFile string `toml:"identity_file"`
+	// AllowList is a list of users to automatically approve access requests for.
+	AllowList []string `toml:"allow_list"`
+}
+
+// Load configuration file
+func loadConfig(filepath string) (*config, error) {
+	t, err := toml.LoadFile(filepath)
+	if err != nil {
+		return nil, trace.Wrap(err)
+	}
+	conf := &config{}
+	if err := t.Unmarshal(conf); err != nil {
+		return nil, trace.Wrap(err)
+	}
+	return conf, nil
+}
+
+// Create a client using an identity file
+client, err := client.New(ctx, client.Config{
+		Addrs: []string{cfg.Addr},
+		Credentials: []client.Credentials{
+			client.LoadIdentityFile(cfg.IdentityFile),
+		},
+	})
+```
+
+
+## Initialize client
+```go
+import (
+    ...
+
+	"github.com/gravitational/teleport/api/client"
+	"github.com/gravitational/teleport/api/types"
+
+	"github.com/google/uuid"
+)
+
+func main() {
+	// Load credential
+	cfg := client.Config{
+		Credentials: []client.Credentials{
+			client.LoadProfile("", ""),
+		},
+	}
+
+	ctx := context.Background()
+	clt, err := client.New(ctx, cfg)
+		if err != nil {
+			// handle error
+    	}
+	defer clt.Close()
+
+	...
+}
+
+```
+
+
+## Create new access request
+
+```go
+func demoClient(ctx context.Context, clt *client.Client) (err error) {
+	// Create a new access request for the `access-admin` user to use the `admin` role.
+	accessReq, err := types.NewAccessRequest(uuid.New().String(), "access-admin", "admin")
+	if err != nil {
+		return fmt.Errorf("failed to make new access request: %w", err)
+	}
+	if err = clt.CreateAccessRequest(ctx, accessReq); err != nil {
+		return fmt.Errorf("failed to create access request: %w", err)
+	}
+	log.Printf("Created access request: %v", accessReq)
+
+	// Approve the access request as if this was another party.
+	if err = clt.SetAccessRequestState(ctx, types.AccessRequestUpdate{
+		RequestID: accessReq.GetName(),
+		State:     types.RequestState_APPROVED,
+	}); err != nil {
+		return fmt.Errorf("failed to accept request: %w", err)
+	}
+	log.Printf("Approved access request")
+
+	if err := clt.DeleteAccessRequest(ctx, accessReq.GetName()); err != nil {
+		return fmt.Errorf("failed to delete access request: %w", err)
+	}
+	log.Println("Deleted access request")
+
+	return nil
+}
+
+```
+
+
+## Run
+
+```bash
+$ go run main.go
+```
+
+
+
