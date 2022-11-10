@@ -2,16 +2,15 @@ import { MenuCategoryProps } from "./Category";
 
 const menu: MenuCategoryProps[] = [
   {
-    title: "API Client",
-    description: "Build Teleport API client",
-    href: "/docs/api-client",
-  },
-  {
     title: "RFDs",
     description: "Teleport RFD",
     href: "/docs/rfd/",
   },
-
+  {
+    title: "API Client",
+    description: "Build Teleport API client",
+    href: "/docs/api-client",
+  },
   {
     title: "Support",
     description: "Teleport documentation",
@@ -19,10 +18,10 @@ const menu: MenuCategoryProps[] = [
     children: [
       {
         icon: "question",
-        title: "Community Forum",
+        title: "Explore Teleport Community",
         description:
           "Ask us a setup question, post your tutorial, feedback or idea on our forum",
-        href: "https://github.com/gravitational/teleport/discussions",
+        href: "https://goteleport.com/community",
       },
       {
         icon: "window",

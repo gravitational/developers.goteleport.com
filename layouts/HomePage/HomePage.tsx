@@ -23,7 +23,7 @@ const HomePage = ({}: any) => {
                 Automate configuration, access policies, JIT access, and
                 integrate with security tools with Teleport API.
               </p>
-              <Button as="link" href="/docs/go-client/">
+              <Button as="link" href="/docs/api-client/">
                 Get Started
               </Button>
             </div>
