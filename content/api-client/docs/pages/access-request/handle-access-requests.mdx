@@ -1,0 +1,121 @@
+---
+title: Handle Access Requests
+description: The Teleport Auth API provides a gRPC API for remotely interacting with a Teleport Auth server.
+h1: Handle Access Requests
+layout: tocless-doc
+---
+
+
+## Teleport Auth Go Client
+
+This program demonstrates how to...
+
+1. Authenticate the client using credential loaders.
+2. Authorize API calls using an independent user and role.
+3. Create a new client and make API calls to the Auth server.
+
+### Demo
+
+This demo can be used to quickly get the API client up and running.
+
+##### Create resources
+
+Create the `access-admin` user and role using the following commands:
+
+```sh
+# Create role
+$ vi access-admin.yaml
+kind: role
+metadata:
+  name: access-admin
+spec:
+  allow:
+    rules:
+      - resources: ['access_request']
+        verbs: ['create', 'update', 'delete']
+    request:
+      roles: ['admin']
+  deny:
+    node_labels:
+      '*': '*'
+version: v3
+
+# Create role
+$ tctl create -f access-admin.yaml
+```
+```sh
+# Create user
+$ tctl users add access-admin --roles=access-admin
+```
+
+## Generate Credentials
+
+Login with `tsh` to generate Profile credentials.
+
+```bash
+# login and automatically generate keys
+$ tsh login --user=access-admin
+```
+
+NOTE: You can pass the `InsecureAddressDiscovery` in `client.Config` field to skip verification of the TLS certificate of the proxy. Don't do this for production clients.
+
+## Run
+
+```bash
+$ go run main.go
+```
+
+
+
+### Inisitalize client
+```go
+
+import (
+    ...
+
+	"github.com/gravitational/teleport/api/client"
+	"github.com/gravitational/teleport/api/types"
+
+	"github.com/google/uuid"
+)
+
+func main() {
+    ctx := context.Background()
+    clt, err := client.New(ctx, cfg)
+        if err != nil {
+            // handle error
+        }
+    defer clt.Close()
+}
+
+```
+
+
+### Create new access request
+
+```go
+// Create a new access request for the `access-admin` user to use the `admin` role.
+accessReq, err := types.NewAccessRequest(uuid.New().String(), "access-admin", "admin")
+if err != nil {
+	return fmt.Errorf("failed to make new access request: %w", err)
+}
+	if err = clt.CreateAccessRequest(ctx, accessReq); err != nil {
+		return fmt.Errorf("failed to create access request: %w", err)
+	}
+	log.Printf("Created access request: %v", accessReq)
+
+	// Approve the access request as if this was another party.
+	if err = clt.SetAccessRequestState(ctx, types.AccessRequestUpdate{
+		RequestID: accessReq.GetName(),
+		State:     types.RequestState_APPROVED,
+	}); err != nil {
+		return fmt.Errorf("failed to accept request: %w", err)
+	}
+	log.Printf("Approved access request")
+
+	if err := clt.DeleteAccessRequest(ctx, accessReq.GetName()); err != nil {
+		return fmt.Errorf("failed to delete access request: %w", err)
+	}
+	log.Println("Deleted access request")
+
+```

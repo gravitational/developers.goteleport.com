@@ -6,7 +6,14 @@
         "entries": [
           { "title": "Introduction", "slug": "/" },
           { "title": "API Architecture", "slug": "/architecture/" },
-          { "title": "Bootstrap Go Client", "slug": "/bootstrap-go-client/" }
+          { "title": "Bootstrap Go Client", "slug": "/bootstrap-go-client/" },
+          { "title": "Access Request", "slug": "/access-request/",
+          "entries": [
+            { "title": "Handeling Access Request", "slug": "/access-request/handle-access-requests/" },
+            { "title": "Approval Workflow", "slug": "/access-request/approval-workflow/" }
+          ]
+        
+          }
         ]
       }
     ]
